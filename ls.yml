@@ -1,7 +1,0 @@
----
-- hosts: all
-  tasks:
-          - command: ls /home
-            register: result
-          - debug:
-                  msg: "{{ result }}"
