@@ -1,0 +1,35 @@
+- hosts: all
+  become: yes
+  tasks:
+          - name: copy file
+            copy:
+                  src: specs.empty
+                  dest: /root/specs.txt
+          - name: replace HOST
+            lineinfile:
+                  path: /root/specs.txt
+                  regexp: '^HOST'
+                  line: HOST= {{ ansible_fqdn }}
+          - name: replace MEMORY
+            lineinfile:
+                  path: /root/specs.txt
+                  regexp: '^MEM'
+                  line: MEMORY= {{ ansible_memtotal_mb }}
+          - name: replace BIOS version
+            lineinfile:
+                  path: /root/specs.txt
+                  regexp: '^BIOS'
+                  line: BIOS= {{ ansible_bios_version }}
+          - name: replace SDA size
+            lineinfile:
+                  path: /root/specs.txt
+                  regexp: '^SDA'
+                  line: SDA_DISK_SIZE= {{ ansible_devices.sda.size }}
+            when : ansible_devices.sda is defined
+          - name: replace SDB size
+            lineinfile:
+                  path: /root/specs.txt
+                  regexp: '^SDB'
+                  line: SDB_DISK_SIZE= {{ ansible_devices.sdb.size }}
+            when : ansible_devices.sdb is defined
+

@@ -1,0 +1,13 @@
+- name: blockinfile
+  hosts: client1
+  become: yes
+  tasks:
+          - file:
+                  path: /home/redhat/file2
+                  state: touch
+          - blockinfile:
+                  path: /home/redhat/file2
+                  marker: '' 
+                  block: |
+                          test10 test20 test30 test40 test50
+                          test6 test7 test8 test9 test10

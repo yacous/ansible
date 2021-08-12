@@ -1,0 +1,25 @@
+- name: lineinfile
+  hosts: client1
+  become: yes
+  tasks:
+          - name: touch file1
+            file:
+                  name: /home/redhat/file1
+                  state: touch
+          - name: add ligne99
+            lineinfile:
+                  path: /home/redhat/file1
+                  line: ligne99
+            notify: remplacer ligne99 par ligne100
+          - name: add ligne1
+            lineinfile:
+                  path: /home/redhat/file1
+                  line: ligne1
+  handlers:
+          - name: remplacer ligne99 par ligne100 
+            lineinfile:
+                  path: /home/redhat/file1
+                  regexp: ligne99
+                  line: ligne100
+
+

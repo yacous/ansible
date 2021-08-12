@@ -1,0 +1,9 @@
+- name: fetch file
+  hosts: client1
+  become: yes
+  tasks:
+          - name: touch file1
+            fetch:
+                    src: /home/redhat/file1
+                    dest: /tmp/
+

@@ -1,0 +1,9 @@
+- name: copy file
+  hosts: client1
+  become: yes
+  tasks:
+          - name: touch file1
+            copy:
+                    src: /etc/ansible/plays/mkdir.yml
+                    dest: /home/redhat
+

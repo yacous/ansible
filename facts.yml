@@ -1,0 +1,13 @@
+- name: show facts
+  hosts: cl1
+  become: yes
+  tasks:
+          - name: afficher addresse ipv4
+            debug:
+              msg: |
+                  The default IPv4 address of {{ ansible_fqdn }} is {{ ansible_default_ipv4.address }}. 
+                  today is {{ ansible_date_time.date }}
+
+                  The default IPv4 address of {{ ansible_facts.fqdn }} is {{ ansible_facts.default_ipv4.address }}.
+                  today is {{ ansible_facts.date_time.date }}
+

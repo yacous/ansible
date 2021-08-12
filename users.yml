@@ -1,0 +1,19 @@
+- name: users
+  hosts: all
+  become: yes
+  vars_files:
+          - lock.yml
+          - users_list.yml
+  tasks:
+          - name: create devops group
+            group:
+                    name: devops
+          - name: create devops users
+            user:
+                    name: "{{ item.username }}"
+                    groups: devops
+                    password: "{{ pw_dev | password_hash('sha512') }}"
+            when: ('prod1' in group_names) and  ('developer' in item.job)
+            loop: "{{ users }}"
+
+                    

@@ -1,0 +1,5 @@
+- name: use apache role
+  hosts: cl1
+  become: yes
+  roles:
+          - apache

@@ -1,0 +1,7 @@
+- name: set selinux to enforcing
+  hosts: client1
+  become: yes
+  tasks:
+          - selinux:
+                  policy: targeted
+                  state: enforcing

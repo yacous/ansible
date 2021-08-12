@@ -1,0 +1,11 @@
+- name: mkdir files from vars file
+  hosts: client1
+  become: yes
+  vars_files: vars.yml
+  tasks:
+          - name: touch file1
+            file:
+                    name: "{{ item }}"
+                    state: directory
+            with_items: "{{ folders }}"
+
