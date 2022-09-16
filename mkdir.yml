@@ -1,5 +1,5 @@
 - name: create folder
-  hosts: 10.161.129.10
+  hosts: all
   become: yes
   tasks:
           - name: touch file1
